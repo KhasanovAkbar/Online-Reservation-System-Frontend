@@ -1,0 +1,47 @@
+/* Add this to your CSS file or inline styles in your React component */
+
+.reservation-list-container {
+    margin: 20px;
+    height: 100vh; /* Set the height to full screen height */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.scroll-container {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.reservation-item {
+    margin-bottom: 10px;
+}
+
+.reservation-item-border {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+/* Optional: Add some hover effect for better user experience */
+.reservation-item-border:hover {
+    background-color: #e6e6e6;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.reservation-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reservation-button:hover {
+    background-color: #2980b9;
+}
