@@ -1,6 +1,6 @@
 /* src/components/login/Login.css */
 
-.login-container {
+.feedback-container {
     max-width: 400px;
     top: 20px;
     margin: auto;
@@ -11,12 +11,12 @@
     position: relative;
 
 }
-.login-button {
+.feedback-button {
     opacity: 1;
     background-color: #0074cc; /* Hex code for a shade of blue */
 
 }
-.login-button:hover{
+.feedback-button:hover{
     background-color: #0074cc; /* Hex code for a shade of blue */
 
 }
@@ -70,11 +70,4 @@ a {
 
 a:hover {
     text-decoration: underline;
-}
-.spinner-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
 }

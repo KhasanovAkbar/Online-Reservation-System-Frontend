@@ -29,7 +29,7 @@ const Login = () => {
             const response = await axios.post('http://localhost:8080/auth/login', user);
 
             // Handle the response
-            if (response.status === 200 && response.data.entities !== null) {
+            if (response.status === 200 && response.data.entities[0] !== null) {
                 // Display a success message to the user
                 window.alert("Login successfully");
 
@@ -69,7 +69,7 @@ const Login = () => {
 
                 </div>
 
-                <button type="submit">Login</button>
+                <button style={{ opacity: 1 }}>Login</button>
             </form>
             <p>
                 Don't have an account? <Link to="/register">Register here</Link>.

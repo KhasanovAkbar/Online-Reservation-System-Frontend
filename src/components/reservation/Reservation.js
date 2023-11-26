@@ -2,9 +2,10 @@
 
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import { BarLoader } from 'react-spinners';
+import {BarLoader} from 'react-spinners';
 import axios from 'axios';
 import polandCities from './PolandCity';
+import userStatusList from "./UserStatus";
 import './Reservation.css'; // Import your CSS file
 
 
@@ -14,6 +15,7 @@ const Reservation = () => {
     const [userId, setUserId] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [userStatus, setUserStatus] = useState('')
     const [selectedFromCity, setSelectedFromCity] = useState('');
     const [selectedToCity, setSelectedToCity] = useState('');
     const [selectedDate, setSelectedDate] = useState('');
@@ -31,18 +33,19 @@ const Reservation = () => {
         // Create a reservation object with the form data
         const reservation = {
             userId,
-            firstName, setFirstName,
-            lastName, setLastName,
+            firstName,
+            lastName,
+            userStatus,
             fromCity: selectedFromCity,
             toCity: selectedToCity,
-            reservationTime: selectedDate,
+            reservationDate: selectedDate,
         };
 
         // Make a POST request to save the reservation
         try {
-            const response = await axios.post('http://localhost:8080/api/reservations', reservation);
+            const response = await axios.post('http://localhost:8080/api/reservations/create', reservation);
 
-            if (response.status === 200) {
+            if (response.status === 200 && response.data.entities[0] !== null) {
                 // Display a success message to the user
                 window.alert(response.data.entities[0]);
                 navigate('/reservation-list');
@@ -74,6 +77,17 @@ const Reservation = () => {
                     <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} required/>
                 </div>
                 <div className="form-group">
+                    <label>User status</label>
+                    <select value={userStatus} onChange={(e) => setUserStatus(e.target.value)} required>
+                        <option value="" disabled>Select User status</option>
+                        {userStatusList.map(status => (
+                            <option key={status} value={status}>
+                                {status}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="form-group">
                     <label>From City:</label>
                     <select value={selectedFromCity} onChange={(e) => setSelectedFromCity(e.target.value)} required>
                         <option value="" disabled>Select From City</option>
@@ -102,10 +116,8 @@ const Reservation = () => {
                     {loading && <BarLoader color="#36D7B7" loading={loading} height={10} width={200}/>}
 
                 </div>
+                <button style={{opacity: 1}}>Submit Reservation</button>
 
-                <button type="submit">
-                    Submit Reservation
-                </button>
             </form>
         </div>
     );

@@ -2,9 +2,11 @@
 
 import React, {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import { BarLoader } from 'react-spinners';
+import {BarLoader} from 'react-spinners';
 import axios from 'axios';
 import './Register.css';
+import userStatusList from "../reservation/UserStatus";
+
 
 const Register = () => {
     // State for form fields
@@ -14,6 +16,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [registrationMessage, setRegistrationMessage] = useState(null);
+    const [userStatus, setUserStatus] = useState('');
 
     // Access the history object to navigate
     const navigate = useNavigate();
@@ -29,6 +32,7 @@ const Register = () => {
             email,
             password,
             confirmPassword,
+            userStatus
         };
 
         try {
@@ -53,8 +57,7 @@ const Register = () => {
             // Handle errors (e.g., show an error message)
             console.error('Registration failed:', error.message);
             window.alert(error.response.data.message);
-        }
-        finally {
+        } finally {
             setLoading(false);
         }
     };
@@ -82,6 +85,18 @@ const Register = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
+                </div>
+
+                <div className="form-group">
+                    <label>User status</label>
+                    <select value={userStatus} onChange={(e) => setUserStatus(e.target.value)} required>
+                        <option value="" disabled>Select User status</option>
+                        {userStatusList.map(status => (
+                            <option key={status} value={status}>
+                                {status}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>

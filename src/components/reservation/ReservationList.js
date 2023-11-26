@@ -1,8 +1,8 @@
 // ReservationList.js
 
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './ReservationList.css'; // Adjust the path based on your project structure
 
 
@@ -16,7 +16,7 @@ const ReservationList = () => {
         const fetchReservations = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080/api/reservations/user/${userId}`);
-                setReservations(response.data.entities[0]);
+                setReservations(response.data.entities[0].reservations);
                 console.log(response.data.entities[0])
             } catch (error) {
                 console.error('Error fetching reservations:', error.message);
@@ -36,18 +36,21 @@ const ReservationList = () => {
                     reservations.map((reservation) => (
                         <div key={reservation.id} className="reservation-item">
                             <div className="reservation-item-border">
-                            <p>
-                                <strong>Full Name:</strong> {reservation.firstName} {reservation.lastName}
-                            </p>
-                            <p>
-                                <strong>From City:</strong> {reservation.fromCity}
-                            </p>
-                            <p>
-                                <strong>To City:</strong> {reservation.toCity}
-                            </p>
-                            <p>
-                                <strong>Reservation Date:</strong> {reservation.reservationDate}
-                            </p>
+                                <p>
+                                    <strong>Full Name:</strong> {reservation.firstName} {reservation.lastName}
+                                </p>
+                                <p>
+                                    <strong>From City:</strong> {reservation.fromCity}
+                                </p>
+                                <p>
+                                    <strong>To City:</strong> {reservation.toCity}
+                                </p>
+                                <p>
+                                    <strong>User Status:</strong> {reservation.userStatus}<br/>
+                                </p>
+                                <p>
+                                    <strong>Reservation Date:</strong> {reservation.reservationTime}
+                                </p>
                             </div>
                         </div>
                     ))

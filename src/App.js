@@ -5,6 +5,7 @@ import Login from './components/login/Login';
 import Activation from './components/activation/Activation';
 import Reservation from './components/reservation/Reservation';
 import ReservationList from './components/reservation/ReservationList';
+import Feedback from './components/feedbackForm/FeedbackForm';
 import Home from './components/home/Home'; // Import the Home component
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="/activate" element={<Activation />} />
                 <Route path="/reservation" element={<Reservation />} />
                 <Route path="/reservation-list" element={<ReservationList />} />
+                <Route path="/feedback" component={Feedback} />
             </Routes>
         </Router>
     );
